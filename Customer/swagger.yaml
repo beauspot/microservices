@@ -1,0 +1,47 @@
+openapi: 3.0.0
+info:
+    title: Ecommerce -REST API
+    description: This is the user management service in Typescript(nodejs/express) using mongodb as the database and mongoose as the ODM
+    contact:
+        name: Beau Iyere
+        email: beauspot@outlook.com
+    version: '1.0.0'
+servers: 
+- url: https://e-commerce-rest-service.onrender.com
+  variables: {}
+paths: 
+    /api/auth/signup:
+       post:
+          tags:
+          - Authentication
+          summary: signup-user
+          operationId: signup-user
+          parameters: []
+          requestBody:
+            description: ""
+            content: 
+                application/json:
+                    schema: 
+                      allOf:
+                      - $ref: '#/components/schemas/signup-user-request'
+                      - example:
+                           firstName: 'Chris'
+                           lastName: 'Iyere'
+                           email: 'beauspot97@gmail.com'
+                           mobileNumber: '+2348056283897'
+                           password: '$%b1058019'
+                           confirmPassword: '$%b1058019'
+                    example:
+                        firstName: 'Chris'
+                        lastName: 'Iyere'
+                        email: 'beauspot97@gmail.com'
+                        mobileNumber: '+2348056283897'
+                        password: '$%b1058019'
+                        confirmPassword: '$%b1058019'
+            required: true
+            responses:
+               '200':
+                  description: ""
+                  headers: {}
+            deprecated: false
+            security: []
