@@ -12,13 +12,12 @@ router.route("/users").get(auth, isAdmin, CustomerController.get_all_users);
 router.route("/logout").get(CustomerController.LogoutController);
 router.route("/refresh-token").get(CustomerController.handleRefreshToken);
 
-router.use(auth, isAdmin);
 router
   .route("/users/:id")
-  .get(CustomerController.get_single_user)
-  .delete(CustomerController.delete_user)
-  .patch(CustomerController.update_user_data)
-  .patch(CustomerController.blockCustomer)
-  .patch(CustomerController.unblock_user);
+  .get(auth, isAdmin, CustomerController.get_single_user)
+  .delete(auth, isAdmin, CustomerController.delete_user)
+  .patch(auth, isAdmin, CustomerController.update_user_data)
+  .patch(auth, isAdmin, CustomerController.blockCustomer)
+  .patch(auth, isAdmin, CustomerController.unblock_user);
 
 export default router;
