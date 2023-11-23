@@ -78,7 +78,10 @@ export class CustomerController {
     });
   }
 
-  public static async get_all_users(req: Request, res: Response): Promise<void> {
+  public static async get_all_users(
+    req: Request,
+    res: Response
+  ): Promise<void> {
     const users = await CustomerServiceClass.get_all_users_service();
     //console.log(users);
     res.status(StatusCodes.OK).json({ numberOfUsers: users.length, users });
