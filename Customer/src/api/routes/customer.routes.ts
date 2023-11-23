@@ -1,10 +1,13 @@
 import express from "express";
 import { CustomerController } from "../controllers/customerControllers";
 import { auth, isAdmin } from "../helpers/middlewares/authMiddleware";
+import { authSchema, validate } from "../helpers/middlewares/zod_validation";
 
 const router = express.Router();
 
-router.route("/signup").post(CustomerController.signUpUser);
+router
+  .route("/signup")
+  .post(validate(authSchema), CustomerController.signUpUser);
 router.route("/login").post(CustomerController.login_user);
 router.route("/login-admin").post(CustomerController.login_administrator);
 
