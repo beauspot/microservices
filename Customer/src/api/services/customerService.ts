@@ -89,7 +89,7 @@ export class CustomerServiceClass {
     }
 
     // checking fot the role of the Admin
-    if (AdminExists.role !== "admin")
+    if (AdminExists.role !== "admin" && AdminExists.role !== "Admin")
       throw new CustomAPIError(
         `The User is not an administrator`,
         StatusCodes.BAD_REQUEST
@@ -306,5 +306,4 @@ export class CustomerServiceClass {
       );
     }
   }
-
 }
