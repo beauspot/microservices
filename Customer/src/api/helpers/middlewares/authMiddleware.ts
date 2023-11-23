@@ -67,7 +67,10 @@ export const isAdmin = asyncHandler(
       // console.log("UserID ->>>", id);
       const adminUser = await authModel.findOne({ id });
       // console.log(adminUser);
-      if (adminUser && adminUser.role !== "admin")
+      if (
+        adminUser &&
+        !(adminUser.role === "admin" || adminUser.role === "Admin")
+      )
         throw new UnauthenticatedError(
           "You are not an an administrator",
           StatusCodes.UNAUTHORIZED
