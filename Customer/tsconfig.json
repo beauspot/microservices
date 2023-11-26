@@ -19,7 +19,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "resolveJsonModule": true,
-    "types": ["node", "express"]
+    "types": ["node", "express", "jest"]
   },
   "ts-node": {
     "complierOptions": {
@@ -32,5 +32,5 @@
     "./package.json",
     "src/api/utils/swagger.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "__tests__", "jest.config.js"]
 }
