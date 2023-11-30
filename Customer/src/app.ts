@@ -76,7 +76,7 @@ if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }
 
-app.get(`/`, (req: Request, res: Response) => {
+app.get(`/${API_PREFIX}`, (req: Request, res: Response) => {
   req.session.isAuth = true;
   res.status(StatusCodes.PERMANENT_REDIRECT).json({
     message: "Welcome to the User-Micro-Service rest api application.",
