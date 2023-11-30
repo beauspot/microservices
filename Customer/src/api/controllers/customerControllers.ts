@@ -168,11 +168,12 @@ export class CustomerController {
         secure: true,
       });
       res.sendStatus(204); // forbidden
+    } else {
+      res.clearCookie("refreshToken", {
+        httpOnly: true,
+        secure: true,
+      });
+      res.sendStatus(200); // success
     }
-    res.clearCookie("refreshToken", {
-      httpOnly: true,
-      secure: true,
-    });
-    res.sendStatus(200); // success
   }
 }
