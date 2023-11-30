@@ -4,6 +4,7 @@ module.exports = {
   testEnvironment: 'node',
   clearMocks: true,
   coverageProvider: "v8",
-  moduleFileExtensions: ['.js', 'jsx', 'ts', 'tsx', 'json', 'node'],
-  
+  moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json', 'node'],
+  verbose: true,
+  // clearMocks: true
 };
