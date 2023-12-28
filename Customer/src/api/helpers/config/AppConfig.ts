@@ -9,7 +9,7 @@ const env = (key: any, defaultValue = null) => {
 const Config = {
   API_PREFIX: process.env.API_PREFIX,
   NODE_ENV: process.env.NODE_ENV || "development",
-  PORT: process.env.PORT || 3000,
+  PORT: process.env.PORT || 3001,
   SESSION_SECRET: process.env.SESSION_SECRET_KEY,
   MONGO_URI: process.env.MONGO_URL,
   JWT_SECRET: process.env.JWT_SECRET,
