@@ -9,6 +9,9 @@ import { applicationConfig } from "./api/helpers/config/app.config";
 import __404_err_page from "./api/helpers/middlewares/notFound";
 import errorHandlerMiddleware from "./api/helpers/middlewares/errHandler";
 
+// Routing
+import productRoute from "./api/routes/product.routes";
+
 const API_PREFIX = applicationConfig.API_PREFIX;
 const app = express();
 const corsOptions = {
@@ -33,6 +36,8 @@ app.get(`/${API_PREFIX}`, (req: Request, res: Response) => {
     message: "Welcome to the Product-Micro-Service rest api application.",
   });
 });
+
+app.use(productRoute);
 
 app.use(errorHandlerMiddleware);
 app.use("*", __404_err_page);
