@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { generateRefreshToken } from "../helpers/utils/refreshToken";
-import { CustomerServiceClass } from "../services/customerService";
+import { CustomerServiceClass } from "../services/customer.service";
+// import { AuthenticatedRequest } from "../helpers/interfaces/authenticateRequest";
 
 export class CustomerController {
   public static async signUpUser(req: Request, res: Response): Promise<void> {
@@ -174,6 +175,42 @@ export class CustomerController {
         secure: true,
       });
       res.sendStatus(200); // success
+    }
+  }
+
+  public static async forgotPassword(
+    req: Request,
+    res: Response
+  ): Promise<void> {
+    const { email } = req.body;
+
+    await CustomerServiceClass.fgtPwdService(email);
+    res.status(StatusCodes.OK).json({
+      status: "success",
+      message: "Password reset link sent to the user email.",
+    });
+  }
+
+  public static async passwordReset(
+    req: Request,
+    res: Response
+  ): Promise<void> {
+    const { token } = req.params;
+    const { password, confirmPassword } = req.body;
+
+    try {
+      await CustomerServiceClass.resetPwdService(
+        token,
+        password,
+        confirmPassword
+      );
+
+      res.status(StatusCodes.OK).json({
+        status: "Success",
+        message: "Password reset Successful",
+      });
+    } catch (error: any) {
+      res.status(StatusCodes.NOT_FOUND).json({ error: error.message });
     }
   }
 }
