@@ -1,10 +1,10 @@
 import app from "./app";
-import { applicationConfig } from "./api/helpers/config/app.config";
+import { AppConfig } from "./api/helpers/config/app.config";
 import connectDb from "./api/helpers/config/dbConfig";
 import { consoleLogger } from "./api/helpers/utils/componentLogger";
 import customErrorLogger from "./api/helpers/utils/errCustomLogger";
 
-const Port = applicationConfig.PORT;
+const Port = AppConfig.PORT;
 
 (async () => {
   try {
