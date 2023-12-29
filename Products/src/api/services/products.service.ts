@@ -10,9 +10,7 @@ export class ProductServiceClass {
     product: ProductDataInterface
   ) => {
     const newProduct = await productModel.create({ ...product });
-    if (!newProduct) {
-      throw new Error("Product creation failed");
-    }
+    if (!newProduct) throw new Error("Product creation failed");
     return newProduct;
   };
 
@@ -63,8 +61,9 @@ export class ProductServiceClass {
     // console.log(productExists);
     if (!productExists) {
       throw new Error(`the product with the id ${productID} does not exist`);
+    } else {
+      return productExists;
     }
-    return productExists;
   };
 
   public static updateProductService = async (
@@ -97,67 +96,4 @@ export class ProductServiceClass {
       );
     return product;
   };
-
-  public static rateProductService = async (
-    userID: string,
-    prodID: string,
-    star: number,
-    comment: string
-  ) => {
-    try {
-      const product = await productModel.findById(prodID);
-      if (!product) {
-        throw new Error(`Product not found`);
-      }
-      let alreadyRated = product.ratings.find(
-        (rating) => rating.postedBy.toString() === userID
-      );
-      if (alreadyRated) {
-        await productModel.updateOne(
-          {
-            "ratings.postedBy": userID,
-          },
-          {
-            $set: { "ratings.$.star": star, "ratings.$.comment": comment },
-          }
-        );
-      } else {
-        await productModel.findByIdAndUpdate(prodID, {
-          $push: {
-            ratings: {
-              star: star,
-              comment: comment,
-              postedBy: userID,
-            },
-          },
-        });
-      }
-      const getAllRatings = await productModel.findById(prodID);
-      if (!getAllRatings) {
-        throw new Error(`Ratings not found`);
-      }
-      let totalRating = getAllRatings.ratings.length;
-      let ratingsum =
-        totalRating === 0
-          ? 0
-          : getAllRatings.ratings
-              .map((item) => item.star)
-              .reduce((prev, curr) => prev + curr, 0);
-      let actualRating =
-        totalRating === 0 ? 0 : Math.round(ratingsum / totalRating);
-
-      const finalproduct = await productModel.findByIdAndUpdate(
-        prodID,
-        {
-          totalrating: actualRating,
-        },
-        { new: true }
-      );
-      return finalproduct;
-    } catch (err: any) {
-      throw new Error(err.message);
-    }
-  };
-    
-    
 }
