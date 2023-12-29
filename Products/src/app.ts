@@ -5,14 +5,14 @@ import cors from "cors";
 import helmet from "helmet";
 import { StatusCodes } from "http-status-codes";
 
-import { applicationConfig } from "./api/helpers/config/app.config";
+import { AppConfig } from "./api/helpers/config/app.config";
 import __404_err_page from "./api/helpers/middlewares/notFound";
 import errorHandlerMiddleware from "./api/helpers/middlewares/errHandler";
 
 // Routing
-import productRoute from "./api/routes/product.routes";
+import productRoute from "./api/routes";
 
-const API_PREFIX = applicationConfig.API_PREFIX;
+const API_PREFIX = AppConfig.API_PREFIX;
 const app = express();
 const corsOptions = {
   origin: "*",
